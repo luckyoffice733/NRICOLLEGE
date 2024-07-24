@@ -4,9 +4,9 @@ JAVA:
   what is java?
 
   Object oriented Programming language and Platform independent language,
-  java was developed by james gosling in 1995.
+  java was developed by James gosling in 1995.
 
-  jdk--1.7 java is object oriented programming lanaguage.
+  jdk--1.7 java is object oriented programming language.
 
   
   What is latest version of version?
@@ -2356,4 +2356,326 @@ public void methodOne(String s,float f,long l){
 
   2)If method signature not available in super class  and the same method signature 
    available in child class ,it will not execute child class method it will throw an error.
+
+
+Interface:
+==========
+
+ --> An interface which contains set of abstract  methods.
+
+ -->Interface used for SRS(software requirement specification or abstract).
+
+ -->An interface contain variables and these variable must be static and final 
+
+   syntax:
+  =======
+
+  public interface InterfaceName{
+
+   //variables;
+
+   //abstract methods
+
+
+   }
+
+ -->once the interface is created who will provide the implementation,  
+    developer is responsible to provide implementaions for the interface
+
+ --> How to provide implementation
+
+    to provide implementations a class must implements the 
+    interface and provide the implementation for all the abstract method.
+
+  note:
+ =====
+
+  1)if we not provide implementation for any one abstract  method then
+    declare the class as abstract.
+
+ 2)we can not create the object for abstract class directly.
+
+ 3) to create the object for the abstract class, create one more
+  class which extends from abstract class  and provide
+  the implementation for the abstract method
+
+ 4) create a object for new created class which extends from 
+   abstract class
+
+ 5) call the data members and member methods of it own class
+   as well as abstract  class by creating object for the new created class
+
+
+Example:
+========
+
+  1) create a interface  named as MyApp
+
+  2) this interface contain two abstracts methods
+     a)public abstract int getSum(int x,int y);
+    b)public abstract  int getAddition(int x,int y,int z);
+
+  3) create a class named as ExampleOnInterface   which implements
+    MyApp interface 
+   note:- provide implementation for all abstract methods.
+
+  4) create a Object for implementation class and call those methods.
+
+
+Sol:
+-----
+interface:
+=======
+
+public interface MyApp{
+
+  public abstract int getSum(int x,int y);
+   public abstract int getAdditions(int x,int y,int z);
+
+}
+
+Implementation Class
+=================
+
+public class ExampleOnInterface implements  MyApp{
+
+     public int getSum( int x,int y){
+      
+      int z=x+y;
+      
+      return z;   
+
+    }
+
+    public int getAddition(int x,int y,int z){
+   
+        return x+y+z;
+   }
+
+
+public static void main(String args[]){
+
+ExampleOnInterface eoi = new ExampleOnInterface();
+
+    int res =     eoi.getSum(40,50);
+    System.out.println("sum of two numbers is : "+res);
+   
+    int res1 = eoi.getAddition(30,40,30);
+    System.out.println("Sum of three numbers is :"+res1)
+   
+ //Interface Reference variable Holding its implementation class Object
+
+   MyApp   mp = new ExampleOnInterface();
+
+    int result = mp.getSum(50,50);
+
+    System.out.println("sum of two numbers is : using interface reference : "+result);
+          
+   int result2 = mp.getAddition(50,50,60);
+
+    System.out.println("sum of three numbers is : using interface reference : "+result2);
+
+}
+
+
+}
+
+
+
+
+
+Example:2
+=========
+  1) create a interface named as MyInterface
+
+  2) this Interface contain abstract methods 
+
+   a) int methodOne();
+    b) String methodTwo(String s);
+    c) void  methodThree();
+
+  3)create a class named as ExImp1 which implements the interface
+  MyInterface 
+  note:-  provide the implementation for two methods methodOne
+         and methodTwo.
+         Then declare the class as abstract
+
+  4)create a one more class named as ExImp2 extends from above class
+  ExImp1 and provide the implementation for abstract method
+   methodThree();
+  5) create a object for ExImp2 class and call the methods
+
+
+
+
+
+
+
+
+public interface MyInterface{
+
+       public abstract int methodOne();
+      public abstract  String methodTwo(String s);
+       public abstract void methodThree();
+}
+
+public class ExImp1 implements MyInterface{
+
+    public int methodOne(){
+    int a=10;
+   System.out.println("we are in method One");
+   return a;
+   }
+
+    public String methodTwo(String s){
+    
+     return "we are in methodTwo of ExImpl Class"
+    }
+
+
+}
+
+
+4)create a one more class named as ExImp2 extends from above class
+  ExImp1 and provide the implementation for abstract method
+   methodThree();
+5) create a object for ExImp2(two ways) class and call the methods
+   
+
+public class ExImp2 extends ExImp1{
+
+public void methodThree(){
+
+System.out.println("we are in method Three of ExImp2");
+
+}
+
+ public static void main(String args[]){
+
+    ExImp2 ex2 = new ExImp2();
+   
+    String wc = ex2.methodTwo("Welcome");
+   System.out.println(wc);
+   
+     ex2.methodThree();
+
+}
+
+
+
+
+}
+
+
+Example3:
+========
+a)
+public interface I1{
+
+     public abstract String getMessage();
+     void display();
+     
+}
+public interface I2 extends I1{
+
+   public abstract String getMessage();
+   void methodTwo();
+
+}
+
+b) create a class named as ExampleOnInterface2 which
+  will provide the implementation for I2(I2 interface inherits  the properties and
+                                                                  abstract methods from I1)
+
+sol:
+===
+
+public class ExampleOnInterface2 implements I2{
+
+   public String getMessage(){
+
+    return "welcome to java we are working on interface"
+   }
+
+   public void methodTwo(){
+   
+    System.out.println("we are in methodTwo");
+   }
+
+   public void display(){
+ 
+    System.out.println("we are in display method ");
+    }
+
+    public static void main(String args[]){
+
+      ExampleOnInterface2 ei2 = new ExampleOnInterface2();
+        
+        System.out.println(ei2.getMessage());
+      
+      ei2.methodTwo();
+      ei2.display();
+     
+
+   }
+
+}
+
+
+ Abstraction:
+ ============
+ abstraction is a process of hiding implementation details
+ and showing useful information to user is called abstraction.
+
+ The advantage of abstraction is security.
+
+ we can achieve full abstraction in java 
+ using interfaces and abstract class
+
+ ex:
+ ===
+
+ ATM--withdrawal a money
+
+
+note:
+======
+we can declare the class as abstract but even it does not contain
+any abstract method to achieve security i.e., for the class
+it will not allow us to create  object for the class directly.
+
+ex:
+====
+case1:
+-------
+ public abstract class Ex1 implements Interface{
+   //not implemented any abstract method
+ //instance methods
+
+ }
+
+case2:
+------
+ public abstract class Ex1{
+  
+ //instance methods
+
+ }
+
+
+final keyword:
+==============
+we can use final keyword in three ways
+
+   1)We can a declare a final variable ,along with 
+   declaration we must initialize that final variable
+   
+   2)final variable will act as constant i.e., value of final 
+   variable cannot be changed(fixed)
+
+   3)we can declare a method as final by using final keyword
+    note:-final method will not participate in method overriding.
+
+  4)we can declare a class as final and we can create the object for final class but 
+   final class will not participate in inheritance.
 
