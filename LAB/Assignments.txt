@@ -1,0 +1,100 @@
+For Every Question Take a Screen Shot of Code as well Output.
+
+Then Copy The ScreenShots in WordDocument then convert into Pdf, Save it.
+
+Then Upload Pdf into below drive link
+
+Drive Link To Upload The Assignments
+====================================
+https://forms.gle/Uh5A9rRmYT6TmUNw8
+
+
+
+1)Write a program that prompts the user to input an integer and then outputs the number with the digits reversed. For example, if the input is 12345, the output should be 54321.
+
+2)Write a program that reads a set of integers, and then prints the sum of the even and odd integers.
+
+3)Write a program that prompts the user to input a positive integer. It should then output a message indicating whether the number is a prime number.
+
+4)Write a do-while loop that asks the user to enter two numbers. The numbers should be added and the sum displayed. The loop should ask the user whether he or she wishes to perform the operation again. If so, the loop should repeat; otherwise it should terminate. 
+
+5)Write a program to print following :
+a)	
+**********
+**********
+**********
+**********
+
+b)
+*
+**
+***
+****
+*****
+
+c)
+    *
+   **
+  ***
+ ****
+*****
+
+d)
+     *
+    ***
+   *****
+  *******
+ *********
+
+e)
+    1
+   222
+  33333
+ 4444444
+555555555
+
+6)Write a Java program to display the cube of the given number up to an integer.
+
+Test Data
+Input number of terms : 4
+Expected Output :
+
+Number is : 1 and cube of 1 is : 1                                               
+Number is : 2 and cube of 2 is : 8                                               
+Number is : 3 and cube of 3 is : 27                                              
+Number is : 4 and cube of 4 is : 64
+
+Arrays:
+-------
+Write a Java program to find the maximum and minimum value of an array.
+Write a Java program to reverse an array of integer values.
+Write a Java program to find duplicate values in an array of integer values.
+Write a Java program to find duplicate values in an array of string values.
+Write a Java program to find common elements between two arrays (string values).
+Write a Java program to find common elements between two integer arrays.
+
+
+Strings:
+--------
+1)Write a Java program to get the character at the given index within the string.
+
+Sample Output:
+
+Original String = Java Exercises!                                                                             
+The character at position 0 is J                                                                              
+The character at position 10 is i 
+
+2)Write a Java program to concatenate a given string to the end of another string.
+
+Sample Output:
+
+String 1: PHP Exercises and                                                                                   
+String 2: Python Exercises                                                                                    
+The concatenated string: PHP Exercises and Python Exercises
+
+3)Write a program to find the number of vowels, consonents, digits and white space characters in a string.
+
+4)Write a program that takes your full name as input and displays the abbreviations of the first and middle names except the last name which is displayed as it is. For example, if your name is Robert Brett Roser, then the output should be R.B.Roser.
+
+5)Write a Java program to Swap Two Strings without Third String Variable.
+
