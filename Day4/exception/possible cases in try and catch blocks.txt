@@ -1,0 +1,78 @@
+case1:
+
+try{
+business logic
+}catch(ExceptionClassName se){
+ //handle the excetpion
+}  --valid
+
+
+case2:
+
+catch(Exception se){
+//handle the exception
+}finally{
+//cleanupcode
+}   // invalid
+
+
+
+case 3:
+---------
+
+try{
+
+//business logic
+}finally{
+   cleanupcode
+} ==valid
+
+
+case4:
+-----
+
+try{
+
+business logic
+} --invalid
+
+
+case5:
+------
+try{
+business logic
+}catch(Exception){
+  //handle the exception
+}finally{
+//clean up code
+
+   try{
+
+   }catch(Exception se){
+      //handle the exception
+    }
+
+} -- valid 
+
+Case4:
+-------
+try{
+
+}catch(ArithmaticException){
+
+}catch(ArrayIndexOutOfBoundException){
+
+} //valid
+
+Case7:
+-----
+try{
+
+}catch(ArithmaticException | ArrayIndexOutOfBoundException ae){
+
+} //valid
+  
+
+
+
+
