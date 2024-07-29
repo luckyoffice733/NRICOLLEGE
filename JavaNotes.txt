@@ -3628,3 +3628,163 @@ conclusion:2
 
 
 
+
+
+  Draw backs of array:
+  --------------------
+  Array size fixed once declared
+  We can store only similar or homogenous types of elements
+
+  Collections:
+  ============
+  A Collection is a group of individual objects represented as a single unit. 
+  Java provides Collection Framework which defines several classes and 
+  interfaces to represent a group of objects as a single unit.
+
+  The Collection interface (java.util.Collection) and Map interface (java.util.Map) 
+  are the two main “root” interfaces of Java collections.
+
+
+
+   List Interface:
+   ===============
+   ArrayList:
+   ----------
+
+  1) ArrayList is class which provide implementations for
+   List interface
+
+  2)ArrayList internally uses re-sizeable (DS)array.
+
+  3)duplicate elements are allowed.
+
+  4)Insertion order is preserved.
+
+
+
+  1)WAP to insert some Objects into ArrayList.
+
+  2)Write a javaprogram to only String object into arraylist 
+    using generics.
+
+   Generics are used to specify a type of data to store into an Collection.
+   Syntax:
+  =======
+   Classname <T> referencevariable = new ClassName<T>()
+
+   note:
+   ====
+  1)Generic type should be a Wrapper class.
+  
+   byte   ----Byte   
+   int       ---Integer
+   float     --Float
+   double   --Double
+   long       --Long
+  
+
+  2) Generic Type can be a Referenced Classes also.
+     ex: String or UserDefined Class(javabean class,model)
+
+ Example:
+ --------------   
+  WAP to store Employee(javabean) class Object into ArrayList and
+    display the  Employees details empId,empName,empSal  using generics
+
+      
+ Iterator
+ ========
+
+ hasNext() - boolean
+
+ next() ---Object
+
+ remove(Object o)--void;
+
+
+ ListIterator:
+ =============
+
+  hasNext() - boolean
+  next() ---Object
+
+remove(Object o)--void;
+
+hasPrevious() - boolean
+
+previous() ---Object
+
+remove(Object o)--void;
+
+
+  LinkedList: 
+  ============
+   LinkedList is a class Which Implements List Interface
+
+   LinkedList internally uses double-linked list data structure .
+
+   Duplicated values are allowed
+  
+   Insertion Order is preserved
+
+   null elements can be allowed
+
+   heterogeneous and Homogeneous elements are allowed
+
+
+
+
+
+  1) WAP to add elements into LinkedList Object
+
+  2) WAP to store only  String Objects into LinkedList using Generics and
+    display the elements
+ 
+  3)WAP to store Course(courseId,courseName,fee) class Object into Linked List
+  using generics and display the elements(courseid,courseName,fee) using ListIterator Forward direction and
+  backward direction.
+
+ ex:
+ ===
+ public class Course{
+    private int cid;
+    private String cname;
+   //constructor
+   //settters and getters methdod
+
+ }
+
+ note:
+ --------
+=>   In ArrayList by default the capacity is 10.
+
+=>    once the capacity is reaches internally the Arraysize
+        growable as (initialcapacity *3/2)+1
+
+ 
+ Vector
+ ============
+ Vector class is legacy class (jdk 1.0)and is a thread safe class
+ 
+ Vector  is a implementation class for List interface.
+
+ Duplicates are allowed
+
+ insertion order is preserved
+
+
+Vector and Stack:
+------------------
+1)WAP to store hetergrnoius elements into Vector.
+2)WAP to store homogeneous(specific type) elements into Vector using generics.
+3)WAP to store JavaBean Object(Employee) into Vector using generics.
+
+1)WAP to store hetergrnoius elements into Stack.
+2)WAP to store homogeneous(specific type) elements into Stack using generics.
+3)WAP to store JavaBean Object(Employee) into Stack using generics.
+
+
+
+
+
+
