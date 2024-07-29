@@ -104,6 +104,39 @@ by default the class will have default access modifier.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  comments:
  =========
 
@@ -1693,9 +1726,6 @@ public class ExampleOnStr
 
 
 
-
-
-
 Inheritance:
   ============
 
@@ -2678,4 +2708,923 @@ we can use final keyword in three ways
 
   4)we can declare a class as final and we can create the object for final class but 
    final class will not participate in inheritance.
+
+Access Modifiers:
+==================
+  AccessModifiers are used to control(visiable) the access of a class,
+  interface ,variable in package.
+
+   Access Modifiers are
+   ---------------------
+
+    1)Default -- 
+     Default access modifier we can  access with in the same package
+
+   2)private --private access modifier we access with in the class
+
+
+   3)protected -- the scope of protected variable and  methods 
+                  we can access with  same package and
+                   we can access outside the package but 
+                   it should be a child class.
+                
+   4)public ---  
+    public accesss modifier is a universal access modifier
+
+
+   Package:
+   ========
+
+   A package is a mechanism to group related classes and interfaces
+   as a single module .
+
+   note:
+   ======
+   package statement should be the firstline in java class.
+
+    
+   syntax:
+   =======
+   package packagename;
+   package  packagename.subpackagename;
+
+   ex:
+   ===
+
+   package com.cg;
+
+   public class Ex3{
+
+
+  }
+
+ Some of the predefined package available in java:
+ =================================================
+
+ 1) java.lang.*;    * - indicates all classes  and interfaces from the packages.
+ 2)java.util.* ;  --collections --- in jdk-->jre-->lib->rt.jar -
+ 3)java.sql.*;  -JDBC           --- oracle -- ojdbc.jar 
+ 4)java.io.*;  -- FILE I/0 Streams --in jdk-->jre-->lib->rt.jar 
+ 5)javax.servlet.http.*;-- Servlets --tomcat -- tomcat/lib/servlet-api.jar
+ 6)java.servlet.*;      - --Servlets tomcat -- tomcat/lib/servlet-api.jar
+  
+  we can use packages in your class using import statement
+  ex:
+  ===
+  import java.util.*;
+
+
+Exception Handling:
+ ===================
+ 
+ ->An unexpected  or unwanted event which disturbs (abnormal  execution)
+   the  normal flow of execution of program is called exception.
+  
+ -> exception handling is a process of converting
+    abnormal execution of a program  into normal execution.
+
+ -> Exception is a run time error
+
+  
+  ex:
+  ------
+   event :-- invalid input or file does not exist or object reference holding null values,
+              or input mismatch..etc
+
+  There are two types of Exceptions:
+  ===================================
+
+   checked Exception -the exception occurred at compile time
+  
+   un-checked Exception -the exception occurred at run time
+
+          
+   Difference Between Exception and Error:
+   ------------------------------------------------------------
+
+   Exception :-- these exceptions caused by our program and 
+                    these are recoverable
+  
+   Error :--   Error is  not caused by our program code and these
+               error caused due to lack of system resources
+               and these errors are not recoverable.
+
+
+    
+  Hierarchy of Exception:
+  =======================
+
+                           Object
+      
+                              |
+                          Throwable
+
+                              |
+               ____________________________________ 
+              |				     |
+            Exception			    Error 
+                 |
+      _______________________________
+      | 		            |  
+  checkedException            uncheckedException
+    |-IOException	                |- RunTimeException
+    |-SQLException   		        |- ArrayIndexOutOfBoundException
+    |-InterruptedException		|- AritheMaticExcpetion
+       ....				......
+   
+  
+    There are two types of Exception
+    1) Built-in or pre-defined Exceptions
+    2) User Defined Exceptions or custom Exception  
+
+
+  
+
+  Example:
+  ========
+   
+   public class Calculation{
+
+   public static void main(String args[] ){
+
+    
+    System.out.print("statement 1");
+     
+    int a=10/0;
+
+    System.out.println("statement2")
+
+ 
+  }
+ 
+  }
+
+   note:
+  ------
+  1)the code which will raise exception is called error code
+    and we need to place  error code  inside in try block.
+
+  2)ANd for error code we need to handle the raised Exception inside catch block
+    by specfiying Exception ClassName.
+
+   syntax:
+   =======
+
+    try{
+
+     business  code;
+
+    }catch(Exceptionclassname reference){
+
+    // handling Exception;
+
+    }finally{  --optional
+
+      //code to close the connection Objects
+   }
+
+  
+    3)suppose in a method exception is occured 
+      internally jvm raise the Exception based on some information
+     1)Exception contains
+                          a)Name of the Exception
+                          b)Description of the Exception
+                          c)Location of the Exception
+   Ex:
+   === At run time JVM displays this Exception
+
+   Exception in thread "main" java.lang.ArithmeticException: / by zero
+        at Calculation.main(Calculation.java:8)
+   sol:
+  -----
+  Name of the Exception : java.lang.ArithmeticException
+  Description of the Exception : / by zero
+  Location of the Exception : main
+   
+
+   4) to handle this exceptions inside catch block
+      we need to call any one  of the method below
+      a) printStackTrace();
+      b)  getMessage(); --it will print  Description of the Exception
+      c) Directly print the exception class reference /or user defined message
+
+
+
+
+
+Example:
+========
+
+ 1)WAP TO HANDLE  ARITHMETIC EXCEPTION.
+
+ sol:
+ ==
+
+ WAP TO HANDLE  ARITHMETIC EXCEPTION AND NUMBERFORMAT EXCEPTION
+ Read the required values using Scanner
+
+ ==============================================================
+
+ sol:
+ =====
+
+ public class ExmapleOnException2
+ {
+
+  public static void main(String args){
+ 
+   Scanner s = new Scanner(System.in);
+  
+     try{
+    System.out.println("Enter the value for n : ");
+     int n =Integer.parseInt(s.nextLine()); //converting the string into Int
+           if(10%n==0){
+                
+                System.out.println("10 is divisible by "+ n);
+              
+              }
+
+      }catch(ArithmeticException ae){
+
+           System.out.println(ae.getMessage());
+
+      }catch(NumberFormatException ne){
+
+            System.out.println(ne.getMessage());
+
+       }catch(Exception e){
+
+                e.printStrackTrace();
+        }
+        System.out.println("statement 2");
+ }
+
+ }
+
+
+
+ finally block:
+ ==============
+ 
+ this block is used to write the clean up code
+ i.e., close the connection objects or any file objects to be closed.
+
+ 1)In finally block we can handle exceptions using try and catch block.
+
+ 2)The finally block   will be executed  whether exception is 
+   occurred or not.
+
+
+
+
+ syntax:
+ ========
+
+ try{
+
+ //business logic
+
+ }catch(){
+
+  //handle the exception
+
+ }
+
+ finally{
+   //to clean up code to close the objects
+
+ }   
+   
+
+ case 1:
+ ========
+
+ 
+  try{
+
+  //business code  to get exception
+
+  } --not valid
+  note:
+ ======
+ if we using try block it must contain either a catch block or
+ a finally block
+    
+
+ case 2:
+ ========
+
+
+ try{
+
+ //business code
+ }
+ finally{
+
+  //clean up code
+
+ }
+  
+
+
+
+  case 3:
+  ========
+
+  catch{
+
+  //to handle exception
+
+  }finally{
+ 
+  //clean up code
+
+  }--not valid
+
+  note:
+  =======
+  catch doesnot exists with out try block 
+
+
+
+ 
+  Example 3:
+  ===========
+
+  Wap  to handle ArrayOutOfBoundException using try,catch and finally blocks
+
+  sol:
+  =====
+    import java.util.Scanner;
+   
+    public class ExampleOnException3{
+  
+    public static void main(String args[]){
+             
+     Scanner s = new Scanner(System.in);
+       
+       try{
+               
+           int[] a= new int[3];
+           
+          for(int i=0;i<4;i++){
+
+            System.out.println("Enter the values for array a" );
+              
+                a[i]=s.nextInt();
+
+         }
+         catch(ArithmeticException ae){
+
+            System.err.println("A number cannot be divisble by zero");
+
+         }
+          catch(ArrayIndexOutOfBoundsException aie){
+
+          System.err.println("Size of Array Is Exceeded ,Current Array size is 3");
+
+         }catch(Exception e){
+
+            System.out.println(e.getMessage());
+
+         }
+         }
+   }
+  }  
+
+    
+  throws:
+  =======
+
+    throws keyword used to throws the exceptions with out 
+    handling it(try and catch).
+
+   we need  to write throws keyword along with method signature;
+
+   syntax:
+   =======
+
+     methodname(if any parameters) throws ExceptionName,...{
+          ///Exception code
+      }
+
+
+
+ 
+ Example:4
+ ==========
+  
+  Write a java program to throw the InterruptedException using
+  throws keyword
+
+  sol:
+  ===
+  public class ExampleOnThrows{
+
+  public static void main(String args[]){
+
+   System.out.println("statement-1");
+   try{
+   Thread.sleep(2000);  //it will supsend the execution for certain milli seconds
+   }catch(InterruptedException ie){
+
+  ie.printStackTrace();
+  }
+  System.out.println("statement-2");
+
+  }
+ }
+
+
+
+  throw:
+  ======
+
+    By default jvm is responsible to create the object
+    for the Built-in Exception Classes and throws the exception messages(printStackTrace)
+     
+    Explicity for those predefinedException classes we need to create the object using throw keyoword
+    based on condition.
+
+    syntax:
+    =======
+ 
+     throw new ExceptionClassName("user defined message");
+
+    note:
+    =====
+    Mainly throw keyword is used to create the object explicity
+      for user defined exception classes or custom Exception classes. 
+
+
+   UserDefinedExceptions:
+  ======================
+   the exceptions which already exists inside java which will not
+   meet the business requirement  then we need to go for
+   user-defined exception or custom exception.
+
+  steps to create userdefined Exception class
+   
+  steps
+  ======
+
+   1) create a user defined  class which extends from Exception or RunTimeException Class  
+
+   2) we need to  create a parameterized constructor 
+       with argument of String type
+
+   3) we need to call super class constructor of Exception( super keyword)
+        inside parameterized constructor of user defined class.
+
+   4)create the object for the user Defined Exception class
+     then throw the exception by using throw keyword.
+
+
+
+
+  Example:
+  ---------
+  
+  1) WAP to create UserDefined Exception 
+  2) WAP to  create object for UserDefined Exception class and
+      throw the Exception using throw keyword
+
+   
+  1)UserDefinedClass Named As : MyException
+  ==========================================
+   
+   sol:
+   -----
+    public  class MyException extends Exception
+    {
+
+          public MyException(String s){
+
+                 super(s);
+
+        }
+    }
+     
+    2)sol:
+    =====    
+    public class UserDefinedExceptionDemo {
+
+       public static void main(String args[]){
+   
+       try{
+                int age=17;
+
+              if(age<18){
+                 throw  new MyException("age should be greater than 18 to vote");                
+   
+              }
+       } catch(MyException e){
+
+              System.err.println(e.getMessage()); 
+
+         }   
+      System.out.println("rest of code");        
+      }
+  
+    }
+
+
+
+
+
+  JAVA IO PACKAGE:
+ ================
+     Most programs need to access external data. 
+     Data is retrieved from an input source. 
+     Program results are sent to output destination. 
+
+    We require this package to read the data from files and
+      to write the data into files.
+
+   
+       We can read and write the data into file 
+      in two ways 
+      1)character
+      2)byte(Stream)
+
+
+       1)character:
+         ==========
+
+            1)File
+            2) FileWriter
+            3) FileReader
+            4)BufferedWriter
+            5)BufferedReader
+            6)PrintWriter
+
+     1) File:
+     ========
+             syntax:
+             ======
+
+         File f  = new File("path of the file");
+
+        ex:
+        ===
+
+         File f = new File("D:\temp.txt");
+
+     note:
+     ======
+     The java complier will check whether file is available or not
+     if file not available the File class will not create that file.
+
+     to create a file:
+     =================
+
+     f.createNewFile();
+
+       Directory:
+       ----------===
+
+       File f = new File("D:\");
+  
+     note:
+     ======
+     The java complier will check whether folder is availabe or not
+     if not available the file class will not create that folder.
+
+
+        to create a Directory :
+        =====================
+   
+             f.mkdir();
+   
+             
+    methods:
+   ---------------
+
+   boolean isFile();
+   boolean isDirectory();
+   String[] list(); -- it will list all directory and subdirectories
+                        and files.
+
+
+
+   2)FileWriter:
+   =============
+
+   This class is used to write character data into a File
+
+    Constructor:
+    ============
+
+     1)FileWriter fw = new FileWriter(String file);
+
+     2)FileWriter fw = new FileWriter(File file);
+
+      
+    Methods:
+   ==========
+    void write(int ch);
+     void write(Char ch[]);
+     void write(String);
+      void flush(); -- it will guarantee that last character
+                            written into a file.
+ 
+      void close();-- to close the FileWrite Object
+ 
+   Example:
+   ---------
+   
+   1) write a java program to write some data into a
+        file c:\\simple.txt using FileWriter.
+
+   sol:
+   =====
+
+     public class ExampleOnFileWriter{
+
+      public static void main(String args[]){
+         // File f = new File("D:\\simple.txt);
+       //FileWriter fw = new FileWriter(f);
+
+     FileWriter fw = new FileWriter("D:\\simple.txt");
+
+         //write(int i)
+
+        fw.write(100); //d
+       
+        fw.write("\n");
+
+        //write (char ch[]);
+
+        char ch[] = {'a','b','c'};
+
+        fw.write(ch);
+
+       //write(String)
+       
+       fw.write("\n welcome to java");
+
+      fw.flush();
+
+      fw.close();   
+    }}
+
+   FileReader:
+   ===========
+
+   FileReader  is used to  read the characters data from
+    the file.
+
+   Constructor:
+  ==============
+
+    FileReader fr  = new FileReader("path of the file to read");
+
+    methods:
+    ========
+
+    int read();  -- it will read the characters until its become   -1
+
+    int read(Char ch[]);
+
+    void close();
+
+
+    Example:
+    ========
+
+   1) write a java program to read the character data from c:\\Data.txt file
+     using FileReader 
+
+
+    sol    
+     ----
+   public class ExampleOnFileReader{
+
+       public static void main(String args[]){
+
+       FileReader fr  = new FileReader("E:\\Data.txt");
+
+          
+     int i = fr.read();
+
+     while(i!=-1){
+      System.out.print((char)i);
+
+        i= fr.read();
+
+    }
+    fr.close();
+    }
+  }
+
+
+
+  BufferedWriter:
+  ===============
+  TO write character data or text data into a file.
+
+  to solve the problem of Filewriter  \n
+
+
+  Java BufferedWriter class is used to provide buffering for Writer instances. 
+  It makes the performance fast. It inherits Writer class. 
+
+  constructors:
+  ==================
+  1)BufferedWriter bw= new BufferedWriter(Writer w);
+
+  2) BufferedWriter bw= new BufferedWriter(Writer w,int buffersize)
+
+ 
+  methods of BufferedWriter:
+  ================================
+
+ 1) write(int ch)
+ 
+  to write single characters to the file
+
+ 2) write(char[] ch)
+
+ 3) write(String s)
+
+ 4) flush()
+
+ 5) close();
+
+ 6) newLine()
+    --------------- to insert a line seperator
+
+  
+   Example:
+   ========
+   
+   WAP to write character data into a file D:\\temp.txt
+
+     sol:
+    =====
+
+     public class ExampleOnBufferedWriter{
+      public static void main(String args[]){
+
+            FileWriter fw = new FileWriter("E:\\temp.txt")
+           BufferedWriter bw = new BufferedWriter(fw);
+
+          //write(int i);
+
+          bw.write(100);
+          bw.newLine();
+    
+          //write(String);
+
+         bw.write("welcome to java");
+
+          bw.newLine();
+         
+        //writer(char ch[]);
+   
+           char ch[] =  { 'a','b','c'};
+
+          bw.write(ch);
+
+          bw.flush();
+
+       bw.close();
+     
+ }
+ }            
+    
+
+  BufferedReader:
+ ==================              
+  BufferedReader is used to read characters data from file;
+ 
+ 1. BufferedReader br = new BufferedReader(Reader r);  
+ 2. BufferedReader br = new BufferedReader(Reader r,int buffersize);
+
+  methods:
+  ========
+
+  1) int read() --- unitl character will become   -1
+
+  2) int read(char[] ch)
+
+  3) void close();
+
+  4)String readLine()   --> !=null
+       
+ 
+     
+   Example:
+   ========
+
+   WAP to read character from the file E:\\temp_read.txt
+
+   sol:
+   ====
+
+    public class ExampleOnBufferedReader
+   {
+
+        public static voia main(String args[])          
+  {
+
+      FileReader fr = new FileReader("E:\\temp_read.txt");
+
+      BufferedReader br = new BufferedReader(fr);
+
+        String s = br.readLine();   //it will read first line from file
+
+             System.out.println(s);
+
+
+    }
+ } 
+
+ PrintWriter:
+ ============
+ Printwriter  is used to write any type of data into a file.
+  constructors:
+  =============
+
+  PrintWriter pw = new PrintWriter(String name);
+  PrintWriter pw = new PrintWriter(File f);
+  PrintWriter pw = new PrintWriter(Writer w);
+
+  methods:
+  ========
+   write(int i);
+   write(char ch);
+   write(String n);
+   flush();
+    close();
+     print(char c);
+     print(int i);
+     print(double d);
+     print(String s);
+     print(boolean b);
+   .......
+
+   example:
+   ========
+
+   1) Write a java program to write text into a file using
+      printWriter
+
+   sol:
+   ====
+    public class ExampleOnPrintWriter
+    {
+       public static void main(String args[]){
+
+         FileWriter fw = new FileWriter("E:\\print_out.txt");
+       PrintWriter pw  = new PrintWriter(fw);
+     
+          //write(int i);
+         pw.write(100); //d 
+          pw.println(100); //100 
+
+       pw.println("welcome to java");
+
+       pw.println(120.0);
+       
+       pw.println(true);
+
+       pw.flush();
+       pw.close();
+
+   }}    
+      }
+
+   }  
+
+conclusion:
+============
+
+1)FileReader and BufferedReader(br -Recommended)
+
+2) FW,BW and PW  (pw is Recommended)
+
+conclusion:2
+=============
+
+=>binary data(video file,audio files,images)==streams class
+
+===InputStream   is   to read binary data 
+
+===to write binary data into file using outputStream
+
+  InputStreamReader
+  FileInputStream
+  DataInputStream is a subclass of FilterInputStream
+ 
+  OutputStreamWriter
+  FileOutputStream
+  DataOutputStream
+
+  Example:
+  =========
+   1)wAP to read the data from a file(temp.txt) and write the data 
+     into sample.txt using FileInputStream and FileOutputStreaam
+
+
 
