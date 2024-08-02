@@ -301,7 +301,7 @@ Ex:
                    
 empno      | int(11)      =====>	setInt(1,1004)				setString(1,"1004")
 ename    | varchar(10)  =======>         setString(2,"rakesh")        or         setString(2,"rakesk")
-sal     | double(10)  ======>          setDouble(3,3000")                     setString(3,3000)
+sal     | double(10)  ======>          setDoubles(3,3000")                     setString(3,3000)
 
 
 //execute the query
@@ -819,11 +819,11 @@ public class ExampleOnRetrieve2 {
 	}
 }
 
-CallableStatement:
+Callable Statement:
 ------------------
 In order to execute the stored procedures/functions from database using jdbc we must follow the following steps:
 
-1. Create an object of CallableStatement by using the following method:
+1. Create an object of Callable Statement by using the following method:
 Here, String represents a call for calling a stored procedure from database environment.
 
 2. Prepare a call either for a function or for a procedure which is residing in database.
@@ -906,18 +906,24 @@ Example:
 ------
  For procedures and functions am using  mysql demo tables emp,dept:
 ===================================================================
-1)create a procedure named as get_emp_details to display empno,ename,sal from emp where deptno 20;
+1)create a procedure named as get_emp_details to display empid,ename,sal from employee where empid 20;
 
 2)write a jdbc code to call the procedure using  CallableStatement and display the records using result set.
 
 sol:
 ---
 
-a) delimiter //
-   create procedure getEmpDetails(in dno decimal)
+a) 
+   delimiter //
+   create procedure getEmpDetails(in eno int)
    begin
-    select empno,ename,sal from emp where deptno=dno;
+    select empid,ename,sal from employee where empid=eno;
    end //
+
+   delimiter ;
+
+   //to execute the procedure
+   call getEmpDetails(101)
 
 b)
 
@@ -1278,6 +1284,27 @@ public class ExampleOnCallingFunction1 {
 		
 	}
 }
+
+
+Assignments:
+------------
+Design Patterns
+1)Different types of patterns
+2)Singleton Design Pattern
+3)What is DBUtil class//Boiler plate code
+4)how to create static methods
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ResultSet:

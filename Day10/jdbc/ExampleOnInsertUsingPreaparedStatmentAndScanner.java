@@ -11,20 +11,23 @@ public class ExampleOnInsertUsingPreaparedStatmentAndScanner {
 		Scanner sc  = new Scanner(System.in);
 		System.out.println("Enter the employee id");
 		int eid = sc.nextInt();
+		
 		System.out.println("Enter the employee Name");
 		String ename=sc.next()+sc.nextLine();
+		
 		System.out.println("Enter the employee sal");
 		double esal=sc.nextDouble();
-		//load or register the driver
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		
-		String url="jdbc:mysql://localhost:3306/NRI";
-		String uname="root";
-		String pwd="root";
-		
-		Connection con = DriverManager.getConnection(url,uname,pwd);
-		
+		/*
+		 * //load or register the driver Class.forName("com.mysql.cj.jdbc.Driver");
+		 * 
+		 * String url="jdbc:mysql://localhost:3306/NRI"; String uname="root"; String
+		 * pwd="root";
+		 * 
+		 * Connection con = DriverManager.getConnection(url,uname,pwd);
+		 */
+		//getting connection Object from DBUTILS class
 		//query
+		Connection con =DBUtil.getMySQLConnection();
 		String query="insert into employee values(?,?,?)";
 		//creating preparedStatment Object
 		PreparedStatement pstmt =con.prepareStatement(query);
