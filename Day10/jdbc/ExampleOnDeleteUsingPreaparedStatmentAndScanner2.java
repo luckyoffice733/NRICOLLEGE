@@ -6,15 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class ExampleOnDeleteUsingPreaparedStatmentAndScanner3 {
+public class ExampleOnDeleteUsingPreaparedStatmentAndScanner2 {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		Scanner sc  = new Scanner(System.in);
-		System.out.println("Enter the employee id");
+		System.out.println("Enter the employee id To delete");
 		int eid = sc.nextInt();
-		System.out.println("Enter the employee Name");
-		String ename=sc.next()+sc.nextLine();
-		System.out.println("Enter the employee sal");
-		double esal=sc.nextDouble();
+		
 		//load or register the driver
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		
@@ -25,21 +22,18 @@ public class ExampleOnDeleteUsingPreaparedStatmentAndScanner3 {
 		Connection con = DriverManager.getConnection(url,uname,pwd);
 		
 		//query
-		String query="update employee set ename=?,sal=? where empid=?";
+		String query="delete from employee where empid=?";
 		//creating preparedStatment Object
 		PreparedStatement pstmt =con.prepareStatement(query);
 		
-		pstmt.setString(1,ename);
-		pstmt.setDouble(2,esal);
-		pstmt.setInt(3,eid);
-		
+		pstmt.setInt(1,eid);
 		//execute the query
 		int i = pstmt.executeUpdate();
 		
 		if(i>0) {
-			System.out.println("Record is Updated");
+			System.out.println("Record is Deleted");
 		}else {
-			System.out.println("Record not Updated");
+			System.out.println("Record not Deleted");
 		}
 		
 	  pstmt.close();
