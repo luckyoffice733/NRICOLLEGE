@@ -1,0 +1,124 @@
+Hidden Variable example With @WebServlet annotation
+===================================================
+
+step:-Create a Dynamice web project named as DemoOnHiddenVariable
+
+1) FirstPage.jsp (under Webapp/ )folder
+
+sol:
+----
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="fs" method="post">
+
+<label>FirstName</label>
+<input type="text" name="fn"><br>
+
+<label>LastName</label>
+<input type="text" name="ln"><br>
+
+<input type="submit" value="next">
+
+</form>
+
+</body>
+</html>
+
+2)Create a servlet class Named as First in com.cts package.
+
+sol:
+----
+
+package com.cts;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/fs")
+public class First extends HttpServlet{
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		resp.setContentType("text/html");
+		PrintWriter out = resp.getWriter();
+		
+		String fname = req.getParameter("fn");
+		String lname = req.getParameter("ln");
+		
+	 out.print("<form action='ss'>");
+	 out.print("<label>FatherName</label>");	
+	 out.print("<input type='text' name='ftn'><br>");	
+	 out.print("<label>MotherName</label>");	
+	 out.print("<input type='text' name='mtn'><br>");
+	 out.print("<input type='hidden' name='hfn' value='"+fname+"'>"); //hidden Variable
+	 out.print("<input type='hidden' name='hln' value='"+lname+"'>");  //hidden variable
+	 out.print("<input type='submit' value='Finish'>");
+	 out.print("</form>");		
+		
+		out.close();
+	}
+}
+
+
+
+3) Create a another servlet named as Second.java in com.cts package.
+
+sol:
+----
+
+package com.cts;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/ss")
+public class Second extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html");
+		PrintWriter out= resp.getWriter();
+		
+		String fname=req.getParameter("hfn");
+		String lname=req.getParameter("hln");
+		
+		String ftname=req.getParameter("ftn");
+		String mtname=req.getParameter("mtn");
+		
+		
+		out.println("FormDetails are : <br>");
+		out.println("FirstName is  : "+fname+"<br>");
+		out.println("LastName is   : "+lname+"<br>");
+		out.println("FatherName is : "+ftname+"<br>");
+		out.println("MotherName is : "+mtname+"<br>");
+		
+		out.println("<a href='FirstPage.jsp'>Click Here TO Go First Page</a>");
+		out.close();
+		
+	}
+	
+
+}

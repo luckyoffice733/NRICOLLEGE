@@ -1,0 +1,130 @@
+1)Product
+---------
+package com.cts.bean;
+
+public class Product {
+
+	private int productId;
+	private String productName;
+	private double price;
+	
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	
+	
+	
+}
+
+
+2)RetrieveDao
+-------------
+package com.cts.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import com.cts.bean.Product;
+
+public class RetrieveDao {
+
+	
+	public ArrayList<Product> getProductDetails(){
+		
+		Connection con=DButil.getConnection();
+		ArrayList<Product> al = new ArrayList<Product>();
+		try {
+			
+			Statement stmtobj = con.createStatement();
+		  String query="select * from product_table ";
+		  
+		 ResultSet rs =stmtobj.executeQuery(query);
+		
+		 while(rs.next()) {
+			  
+			 Product p = new Product();
+			 p.setProductId(rs.getInt(1));
+			 p.setProductName(rs.getString(2));
+			 p.setPrice(rs.getDouble(3));
+			 
+			 al.add(p);			 
+		 }	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return al;	
+	}
+		
+}
+
+
+3)Servlet
+------------
+RetrieveDetails.java
+
+package com.cts.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.cts.bean.Product;
+import com.cts.dao.RetrieveDao;
+
+@WebServlet("/getDetails")
+public class RetrieveDetails extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+	RetrieveDao rdao =new RetrieveDao();
+
+      @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	
+    	 resp.setContentType("text/html"); 
+    	 PrintWriter out= resp.getWriter();
+    	 
+    	 ArrayList<Product> alp=rdao.getProductDetails();
+    	 out.println("Product Details are  <br>");
+    	 out.println("<table border='2px'>");
+    	 out.println("<tr><th>ProductId</th><th>ProductName</th><th>ProductPrice</th></tr>");
+    	
+    	 for(Product p:alp) {
+    		 
+    	  out.println("<tr>");
+    	  out.println("<td>"+p.getProductId()+"</td>");
+    	  out.println("<td>"+p.getProductName()+"</td>");	
+    	  out.println("<td>"+p.getPrice()+"</td>");	
+    	  out.println("</tr>");	
+    	 }
+    	 
+    	out.println("</table"); 
+    	out.close(); 
+    	  
+    }
+}

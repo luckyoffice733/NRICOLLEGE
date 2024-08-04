@@ -1,0 +1,844 @@
+JSP(Java Server Pages)
+---------------------
+
+JSP is a server side technology that does all the processing at server. 
+
+It is used for creating dynamic web applications, using java as programming language.
+
+Basically, any html file can be converted to JSP file by just changing the file extension from
+“.html” to “.jsp”, it would run just fine.
+
+What differentiates JSP from HTML is the ability to use java code inside HTML. 
+In JSP, you can embed Java code in HTML using JSP tags.
+
+
+LifeCycle Methods of Jsp:
+=========================
+when you create any jsp internally it will convert into a Servlet with help of Jsp container (jsp-api.jar)
+
+jspInit()
+_jspService()
+jspDestroy()
+
+
+
+Elements of JSP
+===============
+JSP Declaration
+JSP Scriptlet
+JSP Expression
+JSP Comments
+
+
+JSP Comments
+-------------
+Comments are the one when JSP container wants to ignore certain texts and statements.
+
+When we want to hide certain content, then we can add that to the comments section.
+
+Syntax:
+-------
+<% -- JSP Comments -- %>
+
+This tags are used to comment in JSP and ignored by the JSP container.
+
+
+JSP Scriptlet
+----------------
+Scriptlet tag allows to write Java code into JSP file.
+
+JSP container moves statements in _jspservice() method while generating servlet from jsp.
+
+For each request of the client, service method of the JSP gets invoked hence the code inside 
+the Scriptlet executes for every request.
+
+A Scriptlet contains java code that is executed every time JSP is invoked.
+
+Syntax of Scriptlet tag:
+------------------------
+<% java code %>
+
+Here <% %> tags are scriplets tag and within it, we can place java code.
+
+
+Ex:
+---
+Create  Dynamic web project named as DemoOnJsp 
+Create a jsp file named as index.jsp
+write a html code and javacode(scriptlet) to display welcome message.
+
+Note:
+-----
+Create All Jsp pages under webapp/ or WebContent/
+
+
+JSP Expression(=)
+-----------------
+Expression tag evaluates the expression placed in it.
+
+It accesses the data stored in stored application.
+
+It allows create expressions like arithmetic and logical.
+
+It produces scriptless JSP page.
+
+Syntax:
+-------
+<%= expression %>
+
+Here the expression is the arithmetic or logical expression.
+
+note:
+-----
+Statements cannot terminate with semicolon.
+
+
+
+JSP Declaration
+---------------
+A declaration tag is a piece of Java code for declaring variables, methods and classes. 
+
+If we declare a variable or method inside declaration tag it means that the declaration is 
+made inside the servlet class but outside the service method.
+
+We can declare a static member, an instance variable (can declare a number or string) 
+and methods inside the declaration tag.
+
+Syntax of declaration tag:
+--------------------------
+<%!  Dec var  %>
+
+Here Dec var is the method or a variable inside the declaration tag.
+
+
+JSP Implicit Objects
+=====================
+There are 9 jsp implicit objects. 
+
+These objects are created by the web container that are available to all the jsp pages.
+
+The available implicit objects are out, request, config, session, application etc.
+
+A list of the 9 implicit objects is given below:
+
+Object	                     	Type
+------			   	--------
+out			   	JspWriter
+
+request				HttpServletRequest
+
+response			HttpServletResponse
+
+config				ServletConfig
+
+application			ServletContext
+
+session				HttpSession
+
+pageContext			PageContext
+
+page				Object
+
+exception			Throwable
+
+
+Example:
+--------
+Create a Dynamic web project named as DemoOnImplicitObjects with
+
+
+JSP Directives:
+===============
+The jsp directives are messages that tells the web container how to translate a JSP page into the corresponding servlet.
+
+1)JSP directives are the messages to JSP container. They provide global information about an entire JSP page.
+
+2)JSP directives are used to give special instruction to a container for translation of JSP to servlet code.
+
+3)In JSP life cycle phase, JSP has to be converted to a servlet which is the translation phase.
+
+4)They give instructions to the container on how to handle certain aspects of JSP processing
+
+5)Directives can have many attributes by comma separated as key-value pairs.
+
+In JSP, directive is described in <%@ %> tags.
+
+
+Syntax of Directive:
+---------------------
+<%@ directive attribute="" %>
+
+There are three types of directives:
+------------------------------------
+Page directive
+Include directive
+Taglib directive
+
+JSP Page directive
+------------------
+Syntax of Page directive:
+----------------------------
+<%@ page…%>
+
+It provides attributes that get applied to entire JSP page.
+
+It defines page dependent attributes, such as scripting language, error page, and buffering requirements.
+
+It is used to provide instructions to a container that pertains to current JSP page.
+
+Following are its list of attributes associated with page directive:
+====================================================================
+Language
+Extends
+Import
+contentType
+info
+session
+isThreadSafe
+autoflush
+buffer
+IsErrorPage
+pageEncoding
+errorPage
+isELIgonored
+
+More details about each attribute
+
+1)language: 
+-----------
+It defines the programming language (underlying language) being used in the page.
+
+Syntax of language:
+-------------------
+<%@ page language="value" %>
+
+Here value is the programming language (underlying language)
+
+Example:
+--------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+
+2)Extends: 
+----------
+This attribute is used to extend (inherit) the class like JAVA does
+
+Syntax of extends:
+------------------
+<%@ page extends="value" %>
+
+3)Import: 
+---------
+This attribute is most used attribute in page directive attributes.
+It is used to tell the container to import other java classes, interfaces, enums, etc. 
+
+while generating servlet code.
+It is similar to import statements in java classes, interfaces.
+
+Syntax of import:
+-----------------
+<%@ page import="value" %>
+
+Here value indicates the classes which have to be imported.
+
+4) contentType:
+---------------
+It defines the character encoding scheme i.e. it is used to set the content type and the character set of the response
+The default type of contentType is "text/html; charset=ISO-8859-1".
+
+Syntax of the contentType:
+--------------------------
+<%@ page contentType="value" %>
+
+5)info
+-------
+It defines a string which can be accessed by getServletInfo() method.
+
+This attribute is used to set the servlet description.
+
+Syntax of info:
+---------------
+<%@ page info="value" %>
+
+
+6)Session
+----------
+JSP page creates session by default.
+
+Sometimes we don't need a session to be created in JSP, and hence, we can set this attribute to false in that case.
+
+The default value of the session attribute is true, and the session is created.
+
+When it is set to false, then we can indicate the compiler to not create the session by default.
+
+Syntax of session:
+------------------
+<%@ page session="true/false"%>
+
+Here in this case session attribute can be set to true or false
+
+7)isThreadSafe:
+---------------
+It defines the threading model for the generated servlet.
+
+It indicates the level of thread safety implemented in the page.
+
+Its default value is true so simultaneous
+
+We can use this attribute to implement SingleThreadModel interface in generated servlet.
+
+If we set it to false, then it will implement SingleThreadModel and can access any shared objects and 
+can yield inconsistency.
+
+Syntax of isThreadSafe:
+-----------------------
+<% @ page isThreadSafe="true/false" %>
+
+Here true or false represents if synchronization is there then set as true and set it as false.
+
+8)AutoFlush:
+-------------
+This attribute specifies that the buffered output should be flushed automatically or not 
+and default value of that attribute is true.
+
+If the value is set to false the buffer will not be flushed automatically and if its full, we will get an exception.
+
+When the buffer is none then the false is illegitimate, and there is no buffering, so it will be flushed automatically.
+
+Syntax of autoFlush:
+--------------------
+<% @ page autoFlush="true/false" %>
+
+Here true/false represents whether buffering has to be done or not
+
+9)Buffer:
+---------
+Using this attribute the output response object may be buffered.
+
+We can define the size of buffering to be done using this attribute and default size is 8KB.
+
+It directs the servlet to write the buffer before writing to the response object.
+
+Syntax of buffer:
+-----------------
+<%@ page buffer="value" %>
+
+Here the value represents the size of the buffer which has to be defined. 
+If there is no buffer, then we can write as none, and if we don't mention any value then the default is 8KB
+
+
+
+
+10)isErrorPage:
+---------------
+It indicates that JSP Page that has an errorPage will be checked in another JSP page
+
+Any JSP file declared with "isErrorPage" attribute is then capable to receive exceptions from 
+other JSP pages which have error pages.
+
+Exceptions are available to these pages only.(exception implicity object)
+
+The default value is false.
+
+Syntax of isErrorPage:
+----------------------
+<%@ page isErrorPage="true/false"%>
+
+12)errorPage:
+--------------
+This attribute is used to set the error page for the JSP page if JSP throws an exception and then 
+it redirects to the exception page(isErroPage).
+
+Syntax of errorPage:
+--------------------
+<%@ page errorPage="value" %>
+
+Here value represents the error JSP page value
+
+
+13)isELIgnored:
+---------------
+IsELIgnored is a flag attribute where we have to decide whether to ignore EL ({}) tags or not.
+
+Its datatype is java enum, and the default value is false hence EL is enabled by default.
+
+Syntax of isELIgnored:
+----------------------
+<%@ page isELIgnored="true/false" %>
+
+
+
+JSP Include directive
+======================
+JSP "include directive" is used to include one file to the another file
+
+This included file can be HTML, JSP, text files, etc.
+
+It is also useful in creating templates with the user views and break the pages into header&footer and sidebar actions.
+
+Syntax of include directive:
+----------------------------
+<%@ include file=""%>
+
+It includes file during translation phase
+Here, true/false represents the value of EL whether it should be ignored or not.
+
+
+Expression Language (EL) in JSP
+===============================
+
+The Expression Language (EL) simplifies the accessibility of data stored in the Java Bean component, 
+and other objects like request, session, application etc.
+
+There are many implicit objects, operators and reserve words in EL.
+
+It is the newly added feature in JSP technology version 2.0.
+
+In a JSP, by default, the scripting elements are enabled and EL statement/expressions are disabled. 
+To enable the EL expression in a JSP, developers need to use following page directive.
+
+<%@ page isELIgnored="false"%>
+
+Syntax for Expression Language (EL)
+----------------------------------
+${ expression }  
+
+Implicit Objects in Expression Language (EL)
+
+There are many implicit objects in the Expression Language. They are as follows:
+
+
+Implicit Objects			Usage
+----------------		-------------------
+
+pageScope			it maps the given attribute name with the value set in the page scope
+
+requestScope			it maps the given attribute name with the value set in the request scope
+
+sessionScope			it maps the given attribute name with the value set in the session scope
+
+applicationScope		it maps the given attribute name with the value set in the application scope
+
+param				it maps the request parameter to the single value
+
+paramValues			it maps the request parameter to an array of values
+
+header				it maps the request header name to the single value
+
+headerValues			it maps the request header name to an array of values
+
+cookie				it maps the given cookie name to the cookie value
+
+initParam			it maps the initialization parameter
+
+pageContext			it provides access to many objects request, session etc.
+
+
+JSP Taglib Directive
+--------------------
+JSP taglib directive is used to define the tag library with "taglib" as the prefix, which we can use in JSP.
+
+More detail will be covered in JSP Custom Tags section
+
+JSP taglib directive is used in the JSP pages using the JSP standard tag libraries
+
+It uses a set of custom tags, identifies the location of the library and provides means of 
+identifying custom tags in JSP page.
+
+Syntax of taglib directive:
+---------------------------
+<%@ taglib uri="uri" prefix="value"%>
+
+
+JSTL (JSP Standard Tag Library)
+-------------------------------
+The JSP Standard Tag Library (JSTL) represents a set of tags to simplify the JSP development.
+
+Advantage of JSTL
+-----------------
+Fast Development JSTL provides many tags that simplify the JSP.
+
+Code Reusability We can use the JSTL tags on various pages.
+
+No need to use scriptlet tag It avoids the use of scriptlet tag.
+
+JSTL Tags
+---------
+There JSTL mainly provides five types of tags:
+
+Tag Name					Description
+--------					------------
+Core tags			The JSTL core tag provide variable support, URL management, flow control, etc. 
+				The URL for the core tag is http://java.sun.com/jsp/jstl/core. 
+				The prefix of core tag is c.
+
+Function tags			The functions tags provide support for string manipulation and string length. 
+				The URL for the functions tags is http://java.sun.com/jsp/jstl/functions and 
+				prefix is fn.
+
+Formatting tags			The Formatting tags provide support for message formatting, number and date formatting,etc.
+				The URL for the Formatting tags is http://java.sun.com/jsp/jstl/fmt and prefix is fmt.
+
+XML tags			The XML tags provide flow control, transformation, etc. 
+				The URL for the XML tags is http://java.sun.com/jsp/jstl/xml and prefix is x.
+
+SQL tags			The JSTL SQL tags provide SQL support. 
+				The URL for the SQL tags is http://java.sun.com/jsp/jstl/sql and prefix is sql.
+
+
+
+JSTL Core Tags
+--------------
+The JSTL core tag provides variable support, URL management, flow control etc. 
+
+The syntax used for including JSTL core library in your JSP is:
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+
+JSTL Core Tags List
+--------------------
+
+Tags			Description
+------			------------
+c:out			It display the result of an expression, similar to the way <%=...%> tag work. 
+
+c:import		It Retrives relative or an absolute URL and display the contents to either a String in 'var',
+			a Reader in 'varReader' or the page.
+
+c:set			It sets the result of an expression under evaluation in a 'scope' variable.
+
+c:remove		It is used for removing the specified scoped variable from a particular scope.
+
+c:catch			It is used for Catches any Throwable exceptions that occurs in the body.
+
+c:if			It is conditional tag used for testing the condition and display the body content only
+			if the expression evaluates is true.
+
+c:choose, 
+c:when, 
+c:otherwise		It is the simple conditional tag that includes its body content 
+			if the evaluated condition is true.
+
+c:forEach	        It is the basic iteration tag. It repeats the nested body content for fixed number of 
+			times or over collection.
+
+c:forTokens		It iterates over tokens which is separated by the supplied delimeters.
+
+c:param			It adds a parameter in a containing 'import' tag's URL.
+
+c:redirect		It redirects the browser to a new URL and supports the context-relative URLs.
+
+c:url			It creates a URL with optional query parameters.
+
+
+Note:
+-----
+To work JSTL tags to replace scriptlet with jstltags
+we need to download one jar file named as jstl-1.2.jar
+
+Once downloaded the jar file we need to add this jar to project
+1)by buildpath-->COnfigure buildpath-->add external jars-->select the jar
+2)copy jstl-1.2.jar and past inside th project lib folder /WebContent/WEB-INF/lib/
+
+
+c:out
+-----
+The <c:out> tag is similar to JSP expression tag, but it can only be used with expression. 
+It will display the result of an expression, similar to the way < %=...% > work.
+
+Ex:
+----
+ExOnCore.jsp
+------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@page isELIgnored="false" %>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:out value="${'welcome to JSTL(jsp standard TagLibrary)'}"></c:out>
+<br>
+<c:out value="${'helloworld'}" />
+<br>
+
+<%-- c:import is similar to jsp include --%>
+<c:import var="data" url="Main.jsp"></c:import>
+<c:out value="${data}"></c:out>
+<br>
+<%-- c:import --%>
+<c:import var="data" url="simple.txt"></c:import>
+<c:out value="${data}"></c:out>
+<br>
+
+<%--   c:set tag to declare variable and inject into any scoped 
+attribute(session,reques,appplication) --%>
+<c:set var="in" scope="session" value="${4*4}"></c:set>
+<c:out value="${in}"></c:out>
+
+<%-- c:remove tag is to remove object from any session,application,request scope --%>
+<br>
+<c:set var="un" scope="session" value="${'smith'}"></c:set>
+Before remove :<c:out value="${un}"></c:out> <br>
+<c:remove var="un"/>
+After remove :<c:out value="${un}"></c:out> <br>
+
+<%-- c:if tag is to test the condition ,if expression is true it will the statement --%>
+<c:set var="a" value="30"></c:set>
+<c:set var="b" value="10"></c:set>
+
+<br>
+
+<c:if test="${a > b}">
+<c:out value="${'a is greater than b'}"></c:out>
+</c:if>
+
+<%-- <c:catch> tag catches the exception that occur in program body  --%>
+<br>
+<c:catch var="handleTheException">
+
+<% int y=10/0; %>
+
+</c:catch>
+<br>
+<c:if test="${handleTheException!=null}">
+
+Exception occured is : <c:out value="${handleTheException}"></c:out><br>
+Message : <c:out value="${handleTheException.message}"></c:out>
+
+</c:if>
+
+<%--<c:when> and <c:otherwise> is similar to if-else-if but it must be placed in <c:choose> --%>
+<br>
+<c:set var="a" value="30"></c:set>
+<c:set var="b" value="40"></c:set>
+<c:set var="c" value="20"></c:set>
+<br>
+<c:choose>
+<c:when test="${a>b && a>c}">
+  <c:out value="${'a is greater than b,c'}"></c:out>
+</c:when>
+
+<c:when test="${b>c && b>a}">
+  <c:out value="${'b is greater than a,c'}"></c:out>
+</c:when>
+
+<c:otherwise>
+  <c:out value="${'c is greater than a,b'}"></c:out>
+</c:otherwise>
+
+</c:choose>
+
+<%--
+<c:forech> tag is alternative to while,do-while or for-loop using a scriptlet
+The <c:foreach> tag is most commonly used tag because it iterates over a collection object
+ --%>
+ <br>
+ 
+<c:forEach var="i" begin="1" end="5">
+ <p>No is <c:out value="${i}"></c:out><p>
+
+</c:forEach>
+
+
+<%--
+<c:forTokens>tag is used to convert the line into workds(tokens) based on delimiter
+ --%>
+
+Word Tokens are :
+<br>
+<c:forTokens items="hello#world#working#with#jstl" delims="#" var="wd">
+<c:out value="${wd}"></c:out><br>
+
+</c:forTokens>
+
+<%--
+<c:redirect> it will redirect to another page 
+ --%>
+
+<c:redirect url="https://www.facebook.com/"></c:redirect>
+
+
+
+
+JSTL SQL Tags:
+--------------
+The JSTL sql tags provide SQL support. 
+
+The url for the sql tags is http://java.sun.com/jsp/jstl/sql and prefix is sql.
+
+The SQL tag library allows the tag to interact with RDBMSs (Relational Databases) such as 
+Microsoft SQL Server, mySQL, or Oracle. The syntax used for including JSTL SQL tags library in your JSP is:
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  
+
+JSTL SQL Tags List
+------------------
+
+SQL Tags		Descriptions
+-----------------	------------
+sql:setDataSource	It is used for creating a simple data source suitable only for prototyping.
+
+sql:query		It is used for executing the SQL query defined in its sql attribute or the body.
+
+sql:update		It is used for executing the SQL update defined in its sql attribute or in the tag body.
+
+sql:param		It is used for sets the parameter in an SQL statement to the specified value.
+
+sql:dateParam		It is used for sets the parameter in an SQL statement to a specified java.util.Date value.
+
+sql:transaction		It is used to provide the nested database action with a common connection.
+
+
+Ex:
+---
+
+RetrieveRecords.jsp
+-------------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>  
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<sql:setDataSource var="ds" 
+    url="jdbc:mysql://localhost:3306/cts"
+    driver="com.mysql.cj.jdbc.Driver"
+    user="root" password="root"/>
+    
+<%-- select data from product_table--%>
+ <sql:query dataSource="${ds}" var="rs">
+ select * from product_table;
+ </sql:query>
+ 
+ <h3>ProductDetails are :</h3>
+ <table border="2px">
+ <tr><th>productId</th>
+ <th>productName</th>
+ <th>productPrice</th></tr>
+ 
+ <c:forEach var="p" items="${rs.rows}">
+ <tr>
+ <td><c:out value="${p.productId}"></c:out></td>
+ <td><c:out value="${p.productname}"></c:out></td>
+ <td><c:out value="${p.price}"></c:out></td>
+ </tr>
+ </c:forEach>
+ </table>
+ 
+ 
+ 
+insert.jsp:
+------------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%-- insert a record into dept_1--%>
+
+<sql:setDataSource var="ds" 
+url="jdbc:mysql://localhost:3306/cts"
+driver="com.mysql.cj.jdbc.Driver"
+user="root"
+password="root"/>
+
+<%-- <sql:update> tag is used to perfrom dml(insert,update,delete) --%>
+
+<sql:update dataSource="${ds}" var="count">
+insert into dept_1 values(50,'testing','hyd');
+</sql:update>
+
+<c:if test="${count>0}">
+<c:out value="${'REcord is inserted'}"></c:out>
+</c:if>
+
+delete.jsp:
+-----------
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%-- delete a record from dept_1 where deptno 30 using 
+<sql:update><sql:param>
+--%>
+
+<sql:setDataSource var="ds" 
+url="jdbc:mysql://localhost:3306/cts"
+driver="com.mysql.cj.jdbc.Driver"
+user="root"
+password="root" />
+
+<c:set var="dno" value="30"></c:set>
+
+<sql:update dataSource="${ds}" var="cnt">
+delete from dept_1 where deptno=?;
+<sql:param value="${dno}"/>
+</sql:update>
+
+<c:if test="${cnt >0 }">
+<c:out value="${'Record is deleted'}"></c:out>
+</c:if>
+
+
+Ex:
+---
+DemoOnRetrieve project Replace java code in productDetails.jsp 
+with jstl core tags
+
+productDetails.jsp :
+--------------------
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%-- <%
+
+ArrayList<Product> al =(ArrayList<Product>) request.getAttribute("pdetails");
+%>
+
+<table border="2px">
+<tr><th>ProductId</th><th>ProductName</th><th>Price</th></tr>
+<% 
+for(Product p:al){ %>
+
+<tr>
+   <td><%=p.getProductId() %></td>
+   <td><%=p.getProductName()%></td>
+   <td><%=p.getPrice() %></td>
+  </tr>
+
+<%
+}
+%>
+</table>
+  --%>
+ 
+<%-- we are replace above java with jstl tags--%>
+
+<h3>Product Details are : </h3>
+<table border="2">
+<tr><th>ProductId</th><th>ProductName</th><th>ProductPrice</th></tr>
+
+<c:forEach var="p" items="${requestScope.pdetails}">
+<tr>
+<td><c:out value="${p.getProductId()}"></c:out></td>
+<td><c:out value="${p.getProductName()}"></c:out></td>
+<td><c:out value="${p.getPrice()}"></c:out></td>
+</c:forEach>
+
+
+</table> 
+</body>
+</html>

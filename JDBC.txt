@@ -1293,6 +1293,9 @@ Design Patterns
 2)Singleton Design Pattern
 3)What is DBUtil class//Boiler plate code
 4)how to create static methods
+5) download the tomcat server
+
+
 
 
 

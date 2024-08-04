@@ -1,0 +1,1368 @@
+
+Servlets:
+==========
+
+Servelt is an Api (Interfaces and classess)
+
+Api :-- APi contain set of rules and guidelines in order to develop a servlet class
+
+Servlet is used to develop dynamic webpages.
+
+==> servlet is not standalone application    
+
+  servelt is webapplication which runs over the internet 
+  servlet is webapplication which runs inside the server.
+
+=>Servlet technology is used to create a web application (resides at server side and generates a dynamic web page).
+
+=>Servlet is a class that extends the capabilities of the servers and responds 
+    to the incoming requests. It can respond to any requests.
+
+=>Servlet is a web component that is deployed on the server to create a dynamic web page.
+
+ examples :
+  ---------
+    Google,facebook,amazon.....etc
+
+
+1)Servlet is an APi ;-https://tomcat.apache.org/tomcat-5.5-doc/servletapi/
+
+
+who will provide implementation for servlet api
+===============================================
+Server vendors are responsible to provide the implementation for serveltApi
+(servlet api 3.0 and above)
+
+
+webserver:
+==========
+tomcat -- lib--> servlet-api.jar(servlet engine or servlet container)
+
+
+Application Servers
+====================
+
+Weblogic ---javax-assist-3.0.jar
+Jboss
+websphere --IBM
+Glassfish --etc
+
+note:
+-----
+servlet is java class which doesnot contain main method.
+
+
+
+
+Servlet is an interface:
+=========================
+
+it contain five abstract methods
+
+ javax.servlet.*;
+
+ 1) public void init(ServletConfig config);
+ 2) pubic void service(ServletRequest request,ServletResponse response);
+ 3) public void destroy();
+ 4) public ServletConfig getServletConfig();
+ 5) public String getServletInfo();
+
+
+2)GenericServlet is a abstract class
+  ------------------------------------- 
+  javax.servlet.GenericServlet
+   
+   //it contain implementation for four methods of servlet interface
+    1)init(),destroy,getServletCOnfig,getServletInfo() 
+
+   2)they not provide implementation for service() method()
+     abstract method.
+
+   //Generic Servlet class Contain its own methods.
+
+
+
+3)HttpServlet is abstract class which extends from GenericServlet
+ -----------------------------------------------------------------
+  javax.servlet.http.HttpServlet
+
+  //they provide implementation for service(ServletRequest ,ServletResponse) method
+
+  //it contain own methods
+
+     protectecd doGet(HttpServletRequest request,HttpServletResponse 
+    respone){
+     }
+
+     protected doPost(HttpServletRequest request,HttpServletResponse 
+    respone){
+     }
+
+     protected service(HttpServletRequest request,HttpServletResponse 
+    respone){
+     }
+
+    protected doPut(HttpServletRequest request,HttpServletResponse 
+    respone){
+     }
+  
+ }
+
+
+
+How to develop servlet class:
+=============================
+
+In three ways we can create a Servlet class
+
+ 1)create a Servlet class which implements Servlet interface directly
+    //provide implementation for five methods
+
+ 2)creata a serlvet class which extends from GenericServlet class and
+   provide implementation  for service(ServletRequest req,ServletResponse response)
+
+ 3)create a Servletclass which extends from HttpServlet 
+  and override any one of the method based on requirements.(Welcome)
+
+note:
+-----
+Recommended --- 3
+
+
+
+Http protocol:
+===============
+
+Http protocol is stateless protocol or asyhcronous  protocol
+------------------------------------------------------------
+http(hyper text transfer protocol)
+
+TCP/IP- transmission control protocol /Internet protocol
+
+smtp - simple messageor mail transfer protocol
+
+ftp -- file transfer protocol
+
+
+
+
+please download tomcat server  from apache foundation
+
+=>tomcat server 8.x  in zip 
+
+
+Example:
+---------
+Note:
+-----
+In eclipse for webapplication we need to create project as dynamicwebproject.
+
+
+create a servlet class which displays welcome message(web.xml).
+===============================================================
+
+1)create a class WelcomeServlet extends from HttpServlet
+
+2)override any one of the method from httpservelt class
+  service(HttpServletRequest request,HttpServletResponse response)
+
+3)we need to configure this servlet class(WelcomeServlet) in
+  deployment descriptor(web.xml) by using 
+ <servlet> 
+  <servlet-name>ws</servlet-name>
+  <servlet-class>com.training.WelcomeServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+   <servlet-name>ws</servlet-name>
+   <url-pattern>/welcome</url-pattern>
+  </servlet-mapping>
+  
+
+
+4)deploy the project in the tomcat server
+  
+5)Execute the servlet application
+
+  1) send the request from client(browser) to the server(tomcat) using http protocol  
+ syntax:
+ --------
+  http://localhost:<portno>/projectname/requestedURI(urlpattern)
+
+  ex:
+  ---
+
+  http://localhost:8000/demoOnServlet/welcome
+
+
+
+@WebServlet 
+============
+@WebServlet annotation is the replacement of servlet configuration in web.xml. 
+
+When we annotate our servlet class with @WebServlet annotation the container will be able to 
+recognize this as a servlet at the loading time.
+
+Class annotated with @WebServlet still needs to extends the HttpServlet class
+
+With this annotation we can specify servlet-name, url-mapping, load on Start up, 
+description ,init params ,async supported etc
+
+Example:
+--------
+
+2)Create a webapplication which display welcome message using @WebServlet annotation
+======================================================================================
+
+a)create a class named as HelloWorld extends from HttpServlet
+
+b)override any one of the method from httpservelt class
+  doGet(HttpServletRequest request,HttpServletResponse response)
+
+c)we need to configure this servlet class(HelloWorld) using @WebServlet()
+
+Ex:
+---
+@WebServlet(urlPatterns = {"/hello","/abc","/h"})   //configuring servlet using @webServlet
+public class HelloWorld extends HttpServlet {
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		PrintWriter out=resp.getWriter();
+		
+		out.println("welcome to servlets using @Webservlet anntotaion");
+		
+		out.close();
+		
+	}
+}
+
+d)deploy the project in the tomcat server
+
+e)Execute the servlet application
+
+  1) send the request from client(browser) to the server(tomcat) using http protocol  
+ syntax:
+ --------
+  http://localhost:<portno>/projectname/requestedURI(urlpattern)
+
+ex:
+---
+http://localhost:8080/demoOnServletWithWebServlet/h
+http://localhost:8080/demoOnServletWithWebServlet/hello
+http://localhost:8080/demoOnServletWithWebServlet/abc
+
+
+
+
+
+3) CREATE A SERVLET CLASS , WRITE A CODE TO GET THE EMPLOYEE DETAILS
+FROM  EMP.HTML AND DISPLAY EMPLOYEE DETAILS ON THE BROWSER using @WebServlet annotation.
+
+Create a new DynamicewebProject named as empProject.
+
+Note:
+======
+we need to create All html files or jsp file under WebContent/ Folder
+
+
+a)create a html file named as emp.html with three fields
+
+empno :
+ename :
+salary :
+          save
+
+sol:
+----
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="empDetails" method="get">
+<label>EmployeeId</label>
+<input type="text" name="eid"> <br>
+
+<label>EmployeeName</label>
+<input type="text" name="en"> <br>
+
+<label>Salary</label>
+<input type="text" name="es"> <br>
+
+<input type="submit" value="save">
+
+
+</form>
+
+
+</body>
+</html>
+
+
+
+b)Create a servlet class named EmployeeController and write a code to get the employee form fields values in servlet
+(request.getParameter()).
+      
+c) Display employe details
+EMployee Details
+
+empno : xxxx
+ename :yyyyy
+salary : yyyy
+
+Click here to employee page 
+
+sol:
+----
+
+@WebServlet("/empDetails")
+public class EmployeeController extends HttpServlet{
+	
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	
+    	//get the employeeId,employeeName and Salary from emp.html
+    	
+    	String empid  = req.getParameter("eid");
+    	String ename  = req.getParameter("en");
+    	String salary = req.getParameter("es");
+    	
+    	//Display the data or send the respone back employee details.
+    	
+    	PrintWriter out=resp.getWriter();
+    	
+    	out.println("Employee Details are "+"<br>");
+    	out.println("EmployeeID is : "+empid +"<br>");
+    	out.println("EmployeeName is : "+ename +"<br>");
+    	out.println("EmploySalary is : "+salary +"<br>");
+    	
+    	out.println("<a href='emp.html'>Click Here to Go Employee page</a>");
+    	
+    	out.close();
+    }
+	
+
+}
+
+
+Request this servlet in internal eclipse browser.
+-------------------------------------------------
+http://localhost:8080/empProject/emp.html
+
+
+
+Servlet life cycle methods:
+===========================
+1) init() --- this method will be execute  only once at the 
+              deployment of project
+
+2)service()--- this method is executed for every new request from the
+                client
+
+3)destroy() --- this method executes only once when stop the server   
+                 or undeploy the project
+
+
+
+Control flow of servlet execution:
+====================================
+
+WelcomeServlet
+---------------
+1)client the send request for your servlet class by using url
+  http://localhost:8000/demoOnServlets/welcome
+
+2)Server will load the web.xml into servers jvms memory
+
+3) server get the requested resource of servlet which send by the client
+   note :- welcome
+
+4)server will check whether in web.xml based on that url pattern (welcome) 
+ available or not.
+
+5) if available server search for servlet-name(ws)
+
+6)Based on this servlet-name server will search for servlet tag inside
+  servlet-name tag should be match
+
+6)if match the server search for com.training.WelcomeServlet class and load
+   this class into servers Jvm memory.
+
+7) server will create object for your servlet class(WelcomeServlet) internally
+  using Class.forName 
+  
+   syntax:
+   -----
+
+   Class c = Class.forName("com.training.WelcomeServlet")
+   Object o = c.getInstance();
+   WelcomeServlet ws = (WelcomeServlet)0
+
+8)once the object is created it will call init() method followed by 
+service() method.
+
+
+
+load on startup(web.xml):
+========================
+
+to create the object of your servlet class at the time of deployment.
+
+we need to configure this tag under servlet tag after servelt-class tag
+
+<servlet>
+<load-on-startup>positive integer value</load-on-startup>
+</servlet>
+
+
+or
+@WebServlet(loadOnStartup=1):
+============
+
+Here we declare the servlet StartupServlet with loadOnStartup = 1 which means that this servlet is
+initialized(creating the object) automatically by the servlet container when the server is being started 
+(the message in the init() method will be printed).
+
+
+
+
+
+ServletConfig:
+==============
+ServletConfig is interface available in the javax.servlet.*;
+
+Why ServletConfig:
+==================
+To provide any additional information or extra information(jdbc information)  to your
+ specific  servlet  then we need to go for servlet config object.
+
+1) if we want provide any additional information 
+          we need configure that information in web.xml under servlet tag
+
+          using <init-paramter> 
+                  <param-name>drv</param-name>
+                   <param-value>oracle.jdcb.driver.OracleDriver</param-value>
+                </init-parameter>tag 
+       
+2) to read this initparameter values inside your servlet class
+
+        a) Get the servletConfig object
+
+        ex:     
+             ServletConfig config = getServletConfig();
+     
+3)  get the initparameter values from web.xml using key in your servlets.
+
+        syntax : config.getInitParameter("key");
+
+       Ex . String driver = config.getInitParameter("drv");
+
+
+ Example:
+ ========
+ 
+ Use case on Servlet Config with web.xml configuration file:
+ ===========================================================
+ 
+ 1)create a dynamic webproject  named  as DemoOnServeltConfig
+
+ 2) We need to Configure the additional like
+    url,username,driver class name in web.xml using
+    <init-parameter>tag for specific servelt(ExampleOnserveltConfig)
+
+ 3)create a servelt class named as ExampleOnServletConfig
+    we need write a code to get the driver class,url,username 
+    from web.xml file.
+
+ 4) Display these details on the browser like this:
+   
+    DriverClass : 
+    Url :
+   Useraname :
+
+
+sol:
+----
+web.xml
+-------
+
+
+  <servlet>
+  <servlet-name>exonservletconfig</servlet-name>
+  <servlet-class>com.training.ExampleOnServletConfig</servlet-class>
+  
+  <!-- Additional jdbc information to servlet using init-parameter-->
+  <init-param>
+  <param-name>url</param-name>
+  <param-value>jdbc:mysql//localhost:3306/ust</param-value>
+  </init-param>
+  
+  <init-param>
+  <param-name>driver</param-name>
+  <param-value>com.mysql.cj.Driver</param-value>
+  </init-param>
+  
+   <init-param>
+  <param-name>userName</param-name>
+  <param-value>root</param-value>
+  </init-param>
+  </servlet>
+  
+ 
+  <servlet-mapping>
+  <servlet-name>exonservletconfig</servlet-name>
+  <url-pattern>/sconfg</url-pattern>
+  </servlet-mapping>
+  
+
+ 
+ExampleOnServletConfig:
+=======================
+
+public class ExampleOnServletConfig extends HttpServlet {
+
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//get the ServletConfig Object
+		ServletConfig  config= getServletConfig();
+		
+		//get the init-parameter values based on key from ServletConfig	
+		String ul = config.getInitParameter("url");
+		String drv= config.getInitParameter("driver");
+		String uname = config.getInitParameter("userName");
+		
+		PrintWriter out=resp.getWriter();
+		
+		out.println("Additional Jdbc Information from web.xml");
+		out.println("Url is : "+ul);
+		out.println("driver className is :"+drv);
+		out.println("username is "+uname);
+		
+		out.close();
+		
+	}
+}
+
+Requested url for ExampleOnServletConfig :
+=========================================
+
+http://localhost:8080/DemoOnServletConfig/sconfg
+
+
+
+
+@WebInitParam
+-------------
+The @WebInitParam is used to set parameters which is available trough out in the context of a Servlet or 
+filter in a web application. 
+
+Only Servlet or Filter for which these init parameters are set ,can access the init parameters.
+
+Prior to Servlet 3.0, the <init-param> can be set in web.xml as follows :
+
+<servlet>
+	<servlet-name>name</servlet-name>
+	<servlet-class>className</servlet-class>
+
+	<init-param>
+		<param-name>myParamName</param-name>
+		<param-value>paramValue</param-value>
+	</init-param>
+</servlet>
+
+Note:
+-----
+Now (in Servlet 3.0), you can set the init parameter using annotation @WebInitParam as follows :
+
+@WebServlet(value="/user",
+	initParams = {
+	@WebInitParam(name="drv", value="Hello "),
+	@WebInitParam(name="url", value=" World!")
+})
+
+The @WebInitParam has the following attributes :
+------------------------------------------------
+name : Contains the name of the init parameter as string.
+
+value : Contains the value of the init parameter as string.
+
+description :Contains the description of the init parameter.
+
+
+
+ Example:
+ ========
+ 
+ Use case on Servlet Config with @WebInitParam Annotation
+ ===========================================================
+ 
+ 1)create a dynamic webproject  named  as DemoOnServeltConfigWithAnnotation
+
+ 2) We need to Configure the additional like
+    url,username,driver class name  using @WebInitParam
+    for specific servlet(ExampleOnServletConfigWithAnntation)
+
+ 3)create a servelt class named as ExampleOnServletConfigWithAnntation
+    we need write a code to get the driver class,url,username 
+    
+
+ 4) Display these details on the browser like this:
+   
+    DriverClass : 
+    Url :
+   Useraname :
+
+
+com.cts:
+========
+sol:
+---
+
+
+@WebServlet(urlPatterns = {"/eoscfg"},
+initParams = {
+	@WebInitParam(name="url",value = "jdbc:mysq://locahhost:3306/cts"),
+	@WebInitParam(name ="driver", value = "com.mysql.cj.Driver"),
+	@WebInitParam(name = "userName",value = "cts")
+})
+public class ExampleOnServletConfigWithAnnotation extends HttpServlet{	
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//directly read the additional information from the WebInitParam Annotation
+		ServletConfig config = getServletConfig();
+			
+		String ul= config.getInitParameter("url");
+		String drv = config.getInitParameter("driver");
+		String uname = config.getInitParameter("userName");
+		
+        PrintWriter out=resp.getWriter();		
+		out.println("Additional Jdbc Information Using @WebInitParam Annotation");
+		out.println("Url is : "+ul);
+		out.println("driver className is :"+drv);
+		out.println("username is "+uname);
+		
+		out.close();	
+	}	
+}
+
+
+
+RequestedUrl using browser:
+---------------------------
+http://localhost:8080/DemoOnServletConfigWithAnntation/eoscfg
+
+
+
+
+ServletContext:
+===============
+ServletContext is an interface in javax.servlet.*
+
+why servletContext?
+====================
+
+TO provide extra or additional information which can be accessed by 
+all the servlets
+
+how to configure :
+==================
+
+we need to configure  these information using 
+<context-param>
+<param-name>key</param-name>
+<param-value>value</param-value>
+</context-param> 
+
+this tags after first or root tag <web-app>
+
+to get servletContext objectin  three ways
+===========================================
+
+1) ServletContext application = getServletContext();
+
+2)with the help of config object
+
+    ServletConfig config = getServeltConfig();
+
+        ServeltContext application= config.getServletContext();
+
+3)using request object
+
+  ServletContext application = request.getServeltContext();
+
+
+
+To read the Context-parameter values 
+=======================================
+
+String var = application.getInitParameter("key");
+ 
+
+
+Use case on ServletContext with web.xml configuration file :
+ ============================================================
+ 
+ 1)create a dynamic webproject  named  as DemoOnServeltContext
+
+ 2)create a servelt class named as ExampleOnServletContext
+    we need write a code to get the driver class,url,username nd password
+    from web.xml file.
+
+ 3) We need to Configure the additional information like
+    url,username,driver class name and password in web.xml using
+    <Context-parameter>tag.
+
+ 
+ 4) Display these details on the browser like this:
+   
+    DriverClass : 
+    Url :=--
+   Useraname :---
+
+
+sol:
+====
+web.xml
+--------
+<web-app>
+
+  <!-- Addition Information for all the Servlets -->
+  
+  <context-param>
+  <param-name>url</param-name>
+  <param-value>jdbc:mysql://localhost:3306/cts</param-value>
+  </context-param>
+  
+   <context-param>
+  <param-name>driver</param-name>
+  <param-value>com.mysql.cj.Driver</param-value>
+  </context-param>
+  
+   <context-param>
+  <param-name>userName</param-name>
+  <param-value>cts</param-value>
+  </context-param>
+</web-app>
+
+
+2)class:
+========
+create this below class in com.cts
+----------------------------------
+@WebServlet("/eosc")
+public class ExampleOnServletContext  extends HttpServlet{
+
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	//get the servletContext object using config
+		
+		ServletConfig config =  getServletConfig();
+		ServletContext application=config.getServletContext();
+		
+		//get the addition information from the web.xml
+		String ul=application.getInitParameter("url");
+		String drv=application.getInitParameter("driver");
+		String uname=application.getInitParameter("userName");
+		
+         PrintWriter out=resp.getWriter();
+		
+		out.println("Additional Jdbc Information from web.xml using ServletContext");
+		out.println("Url is : "+ul);
+		out.println("driver className is :"+drv);
+		out.println("username is "+uname);
+		
+		out.close();
+		
+	}
+}
+
+RequestedUrl using browser:
+---------------------------
+http://localhost:8080/DemoOnServletContext/eosc
+
+
+Assignment:
+------------
+What is the use of JSP?and JSP Lifecycle methods ? 
+what is RequestDispatcher?-Difference between forward() vs include() method?
+Difference between RequestDispatcher and response.sendRedirect
+
+
+
+
+
+RequestDispatcher:
+==================
+RequestDispatcher is a Interface in javax.servelt.http.*;
+
+Why RequestDispatcher?
+
+RequestDispatcher is used to dispatch the request from servlet
+to any another resources(html,servelt,jsp)
+
+This interface can also be used to include the content of another resource also. 
+It is one of the way of servlet collaboration.
+
+ex:
+---
+servelt  -- to --- html
+Servlet  --- to -- servlet
+servlet  -- to --- jsp
+   
+There are two methods defined in the RequestDispatcher interface
+-----------------------------------------------------------------
+forward(serveltRequest req,ServeltResponse res)
+include(ServeltRequest req,ServletResponse res)
+
+To get RequestDispatcher object:
+=================================
+RequestDispatcher rd = request.getRequestDispatcher("requested-resource")				
+
+rd.forward(serveltRequest req,ServeltResponse res):
+====================================================
+It forwards the request from one servlet(current response not included) to 
+another resource (such as servlet, JSP, HTML file).
+
+rd.include(ServeltRequest req,ServletResponse res)
+==================================================
+It includes the content of the resource(such as servlet, JSP, HTML file) in the response.
+
+Ex:
+===
+loginproject
+
+sol:
+----
+
+Login.html
+-----------
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="login" method="post">
+
+<label>UserName</label>
+<input type="text" name="un"/><br>
+
+<label>Password</label>
+<input type="password" name="pwd"/><br>
+
+<input type="submit" value="login">
+
+</form>
+
+</body>
+</html>
+
+
+LoginAuthentication.java
+-------------------------
+@WebServlet("/login")
+public class LoginAuthentication extends HttpServlet{
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		PrintWriter out= resp.getWriter();
+		//first get username and password from login.html
+		String uname=req.getParameter("un");
+		String pass=req.getParameter("pwd");
+		
+		if(uname.equals("admin") && pass.equals("admin")) {
+			
+		RequestDispatcher rd = req.getRequestDispatcher("ws");	//dispatch the request to WelcomeServlet
+		 rd.forward(req, resp);
+		}else {
+			
+			out.println("<p style='color:red'>Sorry Username or Passoword are in correct<p>");			
+			RequestDispatcher rd = req.getRequestDispatcher("login.html");	//dispatch the request to login.html
+			 rd.include(req, resp);
+			
+		   }
+	}
+}
+
+
+WelcomeServlet.java
+--------------------
+@WebServlet("/ws")
+public class WelcomeServlet extends HttpServlet{
+	
+@Override
+protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	 
+	  PrintWriter out=resp.getWriter();
+	   String uname=req.getParameter("un");
+	   out.println("HI "+uname+" Successfully Logged In ...!");
+	   
+	   
+	   out.close();
+	  
+	  
+	  
+}
+	
+
+Requested resource  url through client:
+=======================================
+http://localhost:8080/loginproject/login.html
+
+
+
+
+
+Difference between forward() vs include() method
+=================================================
+To understand the difference between these two methods, 
+
+lets take an example: Suppose you have two pages X and Y. In page X you have an include tag, 
+this means that the control will be in the page X till it encounters include tag, 
+after that the control will be transferred to page Y. 
+
+At the end of the processing of page Y, the control will return back to the page X 
+starting just after the include tag and remain in X till the end.
+
+In this case the final response to the client will be send by page X.
+
+Now, we are taking the same example with forward.
+
+We have same pages X and Y. In page X, we have forward tag. 
+In this case the control will be in page X till it encounters forward, 
+after this the control will be transferred to page Y. 
+
+The main difference here is that the control will not return back to X, it will be in page Y till the end of it.
+In this case the final response to the client will be send by page Y.
+
+
+
+
+Difference between RequestDispatcher and response.sendRedirect
+===============================================================
+
+1) using RequestDispatcher we can send request one resource to another
+resource with in the same project and with in the same server.
+
+2)using response.sendRedirect we can send request from one resource to
+another resource with in same project or with in different project and
+with in the same server and with in another server.
+
+
+
+Attribute Scopes:
+==================
+An attribute in servlet is an object that can be set, get or removed from one of the following scopes:
+
+request scope
+session scope
+application scope
+
+The servlet programmer can pass informations from one servlet to another(servlet,jsp) using attributes. 
+
+It is just like passing object from one class to another so that we can reuse the same object again and again.
+
+to store any object information inside request scope,application scope and
+session scope.
+
+Request:
+---------
+1) to store request scope
+=================================
+
+syntax:
+=======
+
+request.setAttribute("key",value);//set the Object into request scope
+ 
+ex:
+====
+request.setAttribute("uname",name);
+
+
+to get value from request object:
+===================================
+
+syntax:
+------
+
+Object o  = request.getAttribute("key");
+
+ex:
+===
+
+Object o = request.getAttribute("uname");
+
+String s = (String) o;
+
+
+to remove the object from request scope:
+==========================================
+syntax:
+-------
+
+request.removeAttribute("key")
+
+application:
+=============
+
+application is a serveltContext object 
+
+1) to store  values inside application object
+
+
+-----------------------------------------------
+
+syntax:
+=======
+
+ServletContext application = getServletContext();
+
+application.setAttribute("key",value);
+
+
+2) to retrive the values from applicationscope
+===============================================
+
+syntax:
+------
+
+ServletContext application = getServletContext();
+
+Object o = application.getAttribute("key");
+
+
+to remove the object from application scope:
+==========================================
+syntax:
+-------
+
+applicatio.removeAttribute("key")
+
+
+
+session scope or session object:
+====================================
+session is an object of HttppSession
+
+
+to store the values inside session scope:
+=========================================
+
+syntax:
+===========
+
+HttpSession session = request.getSession();
+
+session.setAttribute("key",value);
+
+
+
+to retrive the values:
+======================
+
+HttpSession session = request.getSession();
+
+Object o = session.getAttribute("key");
+
+
+to remove the object from session scope:
+==========================================
+syntax:
+-------
+
+session.removeAttribute("key")
+
+
+
+Content-Type:
+------------
+Content Type is also known as MIME Type. MIME stand for Multipurpose internet Mail Extension. 
+It is a HTTP header that provides the description about what are you sending to the browser 
+(like send image, text, video etc.).
+
+This is the format of http protocol to carry the response contains to the client..
+
+Example: Suppose you send html text based file as a response to the client the MIME type specification is
+
+Syntax
+-------
+response.setcontentType("text/html");
+
+response.setContentType("text/html");           // the most popular one
+response.setContentType("text/plain");  
+response.setContentType("text/css");            // Cascading Style Sheet
+response.setContentType("application/html");
+response.setContentType("image/gif");
+response.setContentType("application/zip");
+response.setContentType("application/pdf");
+
+response.sendRedirect:
+======================
+The sendRedirect() method of HttpServletResponse interface can be used to redirect response to another resource, 
+it may be servlet, jsp or html file. 
+
+It accepts relative as well as absolute URL. 
+It works at client side because it uses the url bar of the browser to make another request
+
+syntax:
+=======
+response.sendRedirect("");
+
+
+
+
+Session Management Techniques:
+==============================
+Http protocol is a  stateless protocol 
+
+stateless:
+==========
+it doesnot remember client converstions 
+Every time it will treat the request as new request
+
+
+session :- session simple means time interval from
+           login to logout
+ 
+state :-   state(data) of particular user.
+
+Http protocol is a stateless so we need to maintain state using session tracking techniques. 
+Each time user requests to the server, server treats the request as the new request. 
+So we need to maintain the state of an user to recognize to particular user.
+
+We all know that HTTP is a stateless protocol. 
+All requests and responses are independent. 
+But sometimes you need to keep track of client's activity across multiple requests. 
+
+For eg. When a User logs into your website, 
+not matter on which web page he visits after logging in, his credentials will be with the server, until he logs out.
+
+Session Management is a mechanism used by the Web container to store session information for a particular user.
+
+there are four session management techniques:
+===============================================
+1)hidden variables or hidden form fields
+2)cookies
+3)HttpSession
+4)URL Rewriting
+
+
+1)Hidden Variable or Hiddden Form Fields:
+=========================================
+Hidden form field can also be used to store session information for a particular client. 
+In case of hidden form field a hidden field is used to store client state.
+
+In this case user information is stored in hidden field value and retrieved from another servlet.
+
+to keep state of particular user using hidden variables
+by using <input type="hidden"/>
+
+
+ex:
+===
+<input type='hidden' value='"+value+"'/>
+
+
+
+2)cookies:
+=========
+Cookies are small pieces of information that are sent in response from the web server to the client.
+
+Cookies are the simplest technique used for storing client state.
+
+Cookies are stored on client's computer. 
+They have a lifespan and are destroyed by the client browser at the end of that lifespan.
+
+Using Cookies for storing client state has one shortcoming though, 
+if the client has turned of COokie saving settings in his browser then,
+client state can never be saved because the browser will not allow the application to store cookies.
+Cookie is class  available in javax.servlet.http.*
+
+Cookies are created using Cookie class present in Servlet API. 
+Cookies are added to response object using the addCookie() method. 
+This method sends cookie information over the HTTP response stream. 
+getCookies() method is used to access the cookies that are added to response object.
+
+Creating a new Cookie:
+----------------------
+Cookie ck=new Cookie("key","value") 
+
+setting up lifespance of cookie to destroy:
+-------------------------------------------
+ck.setMaxAge(MilliSeconds)
+
+Sending Cookie to the client(browser)
+--------------------------------------
+response.addCookie(ck)
+
+Getting the Cookie from the Client request
+--------------------------------------------
+Cookie ck[]=request.getCookies()
+
+
+how to store the values into browser memory
+============================================
+
+Cookie ck = new Cookie("uname","raju");
+
+respone.addCookie(ck)
+
+
+how to retrive value from cookie object
+========================================
+
+
+Cookie ck[] = request.getCookies(); 
+
+
+to display:
+===========
+
+for (int i=0;i<ck;i++){
+
+out.println(ck[i].getName()+" "+ck[i].getValue)
+
+}
+
+
+URL-REWRITING:
+==============
+If the client has disabled cookies in the browser then session management using cookie wont work. 
+
+In that case URL Rewriting can be used as a backup. URL rewriting will always work.
+
+In URL rewriting, a token(parameter) is added at the end of the URL. 
+The token consist of name/value pair seperated by an equal(=) sign.
+
+To send the request from one resource to another resource using
+urlrewriting we require query string
+
+syntax
+======
+
+"url-pattern-of-servletclass?key=value&key=value&key=value"  ---queryString
+
+
+
+HttpSession:
+============
+
+HttpSession is an interface available in javax.servlet.http.*
+
+HttpSession object is used to store entire session with a specific client. 
+
+We can store, retrieve and remove attribute from HttpSession object. 
+
+Any servlet can have access to HttpSession object throughout the getSession() method of the HttpServletRequest object.
+
+
+Servlet: How HttpSession works
+------------------------------
+1)On client's first request, the Web Container generates a unique session ID and 
+  gives it back to the client with response. 
+  This is a temporary session created by web container.
+
+2)The client sends back the session ID with each request. 
+  Making it easier for the web container to identify where the request is coming from.
+
+3)The Web Container uses this ID, finds the matching session with the ID and
+  associates the session with the request.
+
+
+Servlet: HttpSession Interface
+-------------------------------
+
+Creating a new Session:
+=======================
+
+HttpSession session = request.getSession() ;
+
+//getSession() method returns a session.if the session already exist,it will return existing session object else
+  create a new session.
+
+or
+
+HttpSession session = request.getSession(true);
+
+//getSession(true) always returns a  new session id
+
+
+Getting a Pre-existing SessionId;
+=================================
+
+HttpSession session = request.getSession(false);
+
+//return a pre-existing session id
+
+
+Destroying  the session id:
+=========================
+session.invalidate() 
+
+
+methods:-
+=========
+
+getId()
+getLastAccessedTime()
+invalidate()--- to remove session object
+
+
+to store the values into session object
+========================================
+
+session.setAttribute("key",value)
+
+
+how to retrive :
+==============
+
+Object o = session.getAttribute("key");
+
+
+=====================================================================
+
+How to remove session object:
+==============================
+
+1) session.setMaxIntervalTime(int ms)
+
+2)when user click on logout button
+
+internally session.invalidate method will be called.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

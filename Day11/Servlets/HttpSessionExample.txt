@@ -1,0 +1,128 @@
+HttpSession example With @WebServlet annotation
+===================================================
+
+step:-Create a Dynamice web project named as DemoOnHttpSession
+
+1) FirstPage.html (under Webapp/ )folder
+
+sol:
+----
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="fs" method="get">
+
+<label>FirstName</label>
+<input type="text" name="fn"><br>
+
+<label>LastName</label>
+<input type="text" name="ln"><br>
+
+<input type="submit" value="click">
+
+</form>
+
+</body>
+</html>
+
+
+2)Create a servlet class Named as First in com.cts package.
+
+sol:
+----
+package com.cts;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/fs")
+public class First extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	   resp.setContentType("text/html");
+	   
+	   //get the firstname and last from Firstpage.html
+	   String fn1=req.getParameter("fn");
+	   String ln1=req.getParameter("ln");
+	   
+	   //get the HttpSessionObject
+	  HttpSession session= req.getSession();
+	  
+	  //store the firstname and lastname in session object using setAttribute  
+	  session.setAttribute("fname",fn1);
+	  session.setAttribute("lname",ln1);
+	  
+	  resp.sendRedirect("ss");
+	   
+	   
+		
+	}
+	
+	
+}
+
+
+
+
+3) Create a another servlet named as Second.java in com.cts package.
+
+sol:
+----
+package com.cts;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/ss")
+public class Second extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html");
+		PrintWriter out =resp.getWriter();
+		HttpSession session=req.getSession(false);
+		
+		Object o1=session.getAttribute("fname");
+		String f=(String)o1;
+		
+		Object o2=session.getAttribute("lname");
+		String l=(String)o2;
+		
+		session.invalidate();//to destroy the session id or sessionObject
+		
+		out.println("Form Details using HttpSession are <br>");
+		out.println("FirstName is : "+f +"<br>");
+		out.println("LastName is : "+l +"<br>");
+		
+		out.close();
+		
+		
+		
+	}
+	
+	
+}

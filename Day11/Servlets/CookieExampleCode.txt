@@ -1,0 +1,110 @@
+Cookies example With @WebServlet annotation
+===================================================
+
+step:-Create a Dynamice web project named as DemoOnCookies
+
+1) FirstPage.jsp (under Webapp/ )folder
+
+sol:
+----
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="fs" method="get">
+
+<label>FirstName</label>
+<input type="text" name="fn"><br>
+
+<label>LastName</label>
+<input type="text" name="ln"><br>
+
+<input type="submit" value="click">
+
+</form>
+
+</body>
+</html>
+
+2)Create a servlet class Named as First in com.cts package.
+
+sol:
+----
+package com.cts;
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/fs")
+public class First extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		resp.setContentType("text/html");
+		
+		 String fn1=req.getParameter("fn");
+		 String ln1=req.getParameter("ln");
+		 
+		Cookie ck = new Cookie("fname",fn1);
+		Cookie ck1 = new Cookie("lname",ln1);
+		resp.addCookie(ck);
+		resp.addCookie(ck1);
+		
+		resp.sendRedirect("ss");
+		
+	}	
+	
+}
+
+
+3) Create a another servlet named as Second.java in com.cts package.
+
+sol:
+----
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/ss")
+public class Second extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+   
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+ 
+    resp.setContentType("text/html");
+    
+    PrintWriter out = resp.getWriter();
+    
+            Cookie ck[]= req.getCookies();
+		out.print("Display the firstName and lastName from cookie object are: <br>");
+		
+		for(int i=0;i<ck.length;i++) {
+			            //key			//value
+			out.println(ck[i].getName()+" "+ck[i].getValue()+"<br>");
+		}
+            
+          out.close();       
+	}
+}
